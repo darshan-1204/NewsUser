@@ -26,9 +26,10 @@ class MainActivity : AppCompatActivity() {
         refrence = FirebaseDatabase.getInstance().reference
 
 
+        refrence.root.child("User").removeValue()
         refrence.root.child("User").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                modelList.clear()
                 for (snap in snapshot.children) {
                     var model = snap.getValue(NewsModel::class.java)
                     modelList.add(model!!)
